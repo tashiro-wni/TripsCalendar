@@ -20,7 +20,7 @@ struct CalendarWidget: Widget {
     private let kind: String = "CalendarWidget"
 
     public var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: CalendarProvider(), placeholder: CalendarPlaceholderView()) { entry in
+        StaticConfiguration(kind: kind, provider: CalendarProvider()) { entry in
             CalendarWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Calendar")

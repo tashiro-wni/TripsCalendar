@@ -11,12 +11,16 @@ import SwiftUI
 struct CalendarProvider: TimelineProvider {
     public typealias Entry = CalendarEntry
 
-    public func snapshot(with context: Context, completion: @escaping (CalendarEntry) -> ()) {
+    func placeholder(in context: Self.Context) -> Self.Entry {
+        CalendarEntry(date: Date(), trips: nextTrips)
+    }
+
+    func getSnapshot(in context: Self.Context, completion: @escaping (Self.Entry) -> Void) {
         let entry = CalendarEntry(date: Date(), trips: nextTrips)
         completion(entry)
     }
 
-    public func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Self.Context, completion: @escaping (Timeline<Self.Entry>) -> Void) {
         let store = TripsStore()
 
         let now = Date.now

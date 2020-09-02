@@ -25,7 +25,7 @@ struct NextTripWidget: Widget {
     private let kind: String = "NextTripWidget"
 
     public var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: NextTripIntent.self, provider: NextTripProvider(), placeholder: NextTripPlaceholderView()) { (entry) in
+        IntentConfiguration(kind: kind, intent: NextTripIntent.self, provider: NextTripProvider()) { (entry) in
             NextTripEntryView(entry: entry)
         }
         .supportedFamilies([.systemSmall, .systemMedium])

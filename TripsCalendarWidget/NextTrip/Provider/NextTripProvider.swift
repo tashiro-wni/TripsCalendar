@@ -13,13 +13,16 @@ struct NextTripProvider: IntentTimelineProvider {
     typealias Intent = NextTripIntent
     public typealias Entry = NextTripEntry
 
-    func snapshot(for configuration: NextTripIntent, with context: Context, completion: @escaping (NextTripEntry) -> Void) {
+    func placeholder(in context: Self.Context) -> Self.Entry {
+        NextTripEntry(date: Date(), trip: nextTrips[0])
+    }
+
+    func getSnapshot(for configuration: Self.Intent, in context: Self.Context, completion: @escaping (Self.Entry) -> Void) {
         let entry = NextTripEntry(date: Date(), trip: nextTrips[0])
         completion(entry)
     }
 
-    func timeline(for configuration: NextTripIntent, with context: Context, completion: @escaping (Timeline<NextTripEntry>) -> Void) {
-
+    func getTimeline(for configuration: Self.Intent, in context: Self.Context, completion: @escaping (Timeline<Self.Entry>) -> Void) {
         let intentTrip = configuration.trip
         let store = TripsStore()
 
@@ -36,4 +39,3 @@ struct NextTripProvider: IntentTimelineProvider {
         completion(timeline)
     }
 }
-
